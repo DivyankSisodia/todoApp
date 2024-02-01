@@ -1,5 +1,4 @@
-import 'dart:convert';
-import 'dart:html';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -22,7 +21,6 @@ class TodoModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'docID': docID,
       'title': title,
       'description': description,
       'category': category,
