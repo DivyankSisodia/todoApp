@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:todoapp/common/show_model.dart';
+import 'package:todoapp/widget/card_todo_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -118,7 +119,14 @@ class HomePage extends StatelessWidget {
                     child: const Text('+ New Task'),
                   ),
                 ],
-              )
+              ),
+              const Gap(20),
+              ListView.builder(
+                  itemCount: 1,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return const CardTododWidget();
+                  }),
             ],
           ),
         ),
@@ -126,5 +134,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-
