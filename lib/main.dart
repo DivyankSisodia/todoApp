@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:todoapp/common/show_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -57,7 +59,7 @@ class HomePage extends StatelessWidget {
             child: Row(
               children: [
                 IconButton(
-                  onPressed: (){}, 
+                  onPressed: () {},
                   icon: const Icon(CupertinoIcons.calendar),
                 ),
                 IconButton(
@@ -69,6 +71,57 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Column(
+            children: [
+              const Gap(20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Today\'s Task',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Text(
+                        'Thursday, 1 Feb',
+                        style: TextStyle(
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(15, 57, 153, 244),
+                      foregroundColor: Colors.blue.shade800,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () => showModalBottomSheet(
+                        isScrollControlled: true,
+                        context: context,
+                        builder: (context) => const AddNewTaskModel()),
+                    child: const Text('+ New Task'),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
+
+
