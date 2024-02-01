@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todoapp/provider/radio_provider.dart';
 
-class RadioWidget extends StatelessWidget {
+class RadioWidget extends ConsumerWidget {
   const RadioWidget({
     super.key,
     required this.titleRadio,
     required this.categColor,
+    required this.valueInput,
+    required this.onChangedValue,
   });
 
   final String titleRadio;
   final Color categColor;
+  final int valueInput;
+  final VoidCallback onChangedValue;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final radio = ref.watch(radioProvider);
     return Material(
       child: Theme(
         data: ThemeData(
@@ -30,9 +37,10 @@ class RadioWidget extends StatelessWidget {
               ),
             ),
           ),
-          value: 1,
-          groupValue: 0,
-          onChanged: (value) {},
+          value: valueInput,
+          groupValue: radio,
+          onChanged: (value) => onChangedValue(),
+          activeColor: categColor,
         ),
       ),
     );
