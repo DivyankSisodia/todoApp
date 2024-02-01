@@ -206,11 +206,12 @@ class AddNewTaskModel extends ConsumerWidget {
                       }
                       ref.read(serviceProvider).addNewTask(
                         TodoModel(
-                          title: titleController.text,
+                          titleTask: titleController.text,
                           description: descController.text,
                           category: category,
                           dateTask: ref.read(dateProvider),
                           timeTask: ref.read(timeProvider),
+                          isDone: false,
                         ),
                       );
                       titleController.clear();

@@ -1,14 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:todoapp/common/show_model.dart';
+import 'package:todoapp/provider/todo_services.dart';
 import 'package:todoapp/widget/card_todo_widget.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final todoData = ref.watch(fetchStreamProvider);
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
@@ -17,9 +20,9 @@ class HomePage extends StatelessWidget {
         elevation: 0,
         title: ListTile(
           leading: CircleAvatar(
-            backgroundColor: Colors.amber.shade300,
+            backgroundColor: Colors.orange.shade100,
             radius: 35,
-            child: Image.asset('asset/images/man.png'),
+            child: Image.asset('asset/images/man.png', width: 55),
           ),
           title: Text(
             'Hello I\'m',
@@ -94,17 +97,19 @@ class HomePage extends StatelessWidget {
                     onPressed: () => showModalBottomSheet(
                         isScrollControlled: true,
                         context: context,
-                        builder: (context) =>  AddNewTaskModel()),
+                        builder: (context) => AddNewTaskModel()),
                     child: const Text('+ New Task'),
                   ),
                 ],
               ),
               const Gap(20),
               ListView.builder(
-                  itemCount: 1,
+                  itemCount: todoData.value!.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return const CardTododWidget();
+                    return CardTododWidget(
+                      getIndex: index,
+                    );
                   }),
             ],
           ),
