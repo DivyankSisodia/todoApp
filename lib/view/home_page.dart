@@ -2,16 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:todoapp/common/show_model.dart';
 import 'package:todoapp/provider/todo_services.dart';
 import 'package:todoapp/widget/card_todo_widget.dart';
 
 class HomePage extends ConsumerWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final todoData = ref.watch(fetchStreamProvider);
+
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('EEE d MMM').format(now);
+
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
@@ -66,10 +71,10 @@ class HomePage extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Today\'s Task',
                         style: TextStyle(
                           fontSize: 20,
@@ -78,8 +83,8 @@ class HomePage extends ConsumerWidget {
                         ),
                       ),
                       Text(
-                        'Thursday, 1 Feb',
-                        style: TextStyle(
+                        formattedDate,
+                        style: const TextStyle(
                           color: Colors.grey,
                         ),
                       ),
